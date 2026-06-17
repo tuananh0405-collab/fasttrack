@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Dashboard palette -->
+    <color name="dashboard_bg">#FF0D1117</color>      <!-- near-black -->
+    <color name="dashboard_text">#FFD0D7DE</color>    <!-- light gray -->
+    <color name="dashboard_accent">#FF58A6FF</color>  <!-- blue for speed -->
+    <color name="dashboard_status">#FF3FB950</color>  <!-- green for connection -->
+</resources>

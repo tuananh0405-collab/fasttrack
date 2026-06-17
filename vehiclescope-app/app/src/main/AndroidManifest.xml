@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--
+        CAR_SPEED / CAR_FUEL / CAR_POWERTRAIN require protectionLevel="signature|privileged".
+        On a production AAOS build this app must be pre-installed as a privileged system app
+        AND listed in /etc/permissions/privapp-permissions-vehiclescope.xml.
+        On the AAOS emulator (eng/userdebug build) these are granted automatically.
+    -->
+    <uses-permission android:name="android.car.permission.CAR_SPEED" />
+    <uses-permission android:name="android.car.permission.CAR_FUEL" />
+    <uses-permission android:name="android.car.permission.CAR_POWERTRAIN" />
+    <uses-permission android:name="android.car.permission.CAR_ENERGY" />
+
+    <!-- Required for foreground service (all API levels) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+    <!-- Required for foregroundServiceType="connectedDevice" (API 34+) -->
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE_CONNECTED_DEVICE" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.MyApplication">
+
+        <!--
+            android.car is a system library on AAOS; required=false lets the APK
+            install on non-AAOS devices (FakeVhalDataSource runs as fallback).
+        -->
+        <uses-library android:name="android.car" android:required="false" />
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!--
+            VehicleDataService: not exported — only this app's activity binds to it.
+            foregroundServiceType="connectedDevice" is required on API 34+ for services
+            that interact with vehicle/peripheral hardware.
+        -->
+        <service
+            android:name=".service.VehicleDataService"
+            android:exported="false"
+            android:foregroundServiceType="connectedDevice" />
+
+    </application>
+
+</manifest>

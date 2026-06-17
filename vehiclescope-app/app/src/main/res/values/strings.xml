@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">VehicleScope</string>
+    <string name="notif_channel_name">Vehicle Data</string>
+    <string name="notif_channel_desc">Live vehicle telemetry from VehicleScope</string>
+    <string name="notif_title">VehicleScope</string>
+    <string name="notif_text">Monitoring vehicle data</string>
+</resources>
